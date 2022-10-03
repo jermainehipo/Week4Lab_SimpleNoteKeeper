@@ -38,11 +38,21 @@ public class NoteServlet extends HttpServlet {
         request.setAttribute("title", note.getTitle());
         request.setAttribute("content", note.getContent());
 
-        
-        getServletContext().getRequestDispatcher("/WEB-INF/viewnote.jsp")
-                .forward(request, response);
-        
-        
+        String req = request.getRequestURI();
+        switch (request.getRequestURI()) {
+        case "/Week4Lab_SimpleNoteKeeper/":
+            System.out.print(req);
+            getServletContext().getRequestDispatcher("/WEB-INF/viewnote.jsp")
+                 .forward(request, response); break;
+        case "/Week4Lab_SimpleNoteKeeper/note":
+            System.out.print("EDIT ");
+            getServletContext().getRequestDispatcher("/WEB-INF/editnote.jsp")
+                 .forward(request, response); break;
+        default:
+            System.out.print(req);
+            getServletContext().getRequestDispatcher("/WEB-INF/viewnote.jsp")
+                 .forward(request, response); break;
+         }
     }
 
     @Override
